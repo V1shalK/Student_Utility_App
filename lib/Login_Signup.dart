@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'homepage.dart'; // Import homepage
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -29,6 +30,26 @@ class _LoginPageState extends State<LoginPage> {
       _passwordController.clear();
       _nameController.clear();
     });
+  }
+
+  void _handleSubmit() {
+    if (_isLogin) {
+      print('Login button pressed');
+      print('Email: ${_emailController.text}');
+      print('Password: ${_passwordController.text}');
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => DashboardPage()),
+      );
+    } else {
+      print('Sign Up button pressed');
+      print('Name: ${_nameController.text}');
+      print('Email: ${_emailController.text}');
+      print('Password: ${_passwordController.text}');
+      setState(() {
+        _isLogin = true;
+      });
+    }
   }
 
   @override
@@ -88,9 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                                 Expanded(
                                   child: GestureDetector(
                                     onTap: () {
-                                      if (!_isLogin) {
-                                        _toggleForm();
-                                      }
+                                      if (!_isLogin) _toggleForm();
                                     },
                                     child: Text(
                                       'Login',
@@ -104,9 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    if (_isLogin) {
-                                      _toggleForm();
-                                    }
+                                    if (_isLogin) _toggleForm();
                                   },
                                   child: Container(
                                     alignment: Alignment.topRight,
@@ -137,7 +154,6 @@ class _LoginPageState extends State<LoginPage> {
                                     borderSide: BorderSide(color: Colors.grey[600]!),
                                   ),
                                 ),
-                                keyboardType: TextInputType.text,
                               ),
                               const SizedBox(height: 20.0),
                             ],
@@ -199,18 +215,7 @@ class _LoginPageState extends State<LoginPage> {
                   right: 0,
                   child: Center(
                     child: ElevatedButton(
-                      onPressed: () {
-                        if (_isLogin) {
-                          print('Login button pressed');
-                          print('Email: ${_emailController.text}');
-                          print('Password: ${_passwordController.text}');
-                        } else {
-                          print('Sign Up button pressed');
-                          print('Name: ${_nameController.text}');
-                          print('Email: ${_emailController.text}');
-                          print('Password: ${_passwordController.text}');
-                        }
-                      },
+                      onPressed: _handleSubmit,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFA0C3A0),
                         foregroundColor: Colors.white,
@@ -235,28 +240,31 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: buttonOverlap + 30.0),
             if (_isLogin)
-              Text(
-                'Or Login using',
-                style: TextStyle(
-                  color: Colors.grey[700],
-                  fontSize: 16,
-                ),
-              ),
-            const SizedBox(height: 20.0),
-            if (_isLogin)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Column(
                 children: [
-                  _buildSocialIcon(
-                    'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/2048px-Google_%22G%22_logo.svg.png',
-                    Icons.g_mobiledata,
-                    Colors.red,
+                  Text(
+                    'Or Login using',
+                    style: TextStyle(
+                      color: Colors.grey[700],
+                      fontSize: 16,
+                    ),
                   ),
-                  const SizedBox(width: 30.0),
-                  _buildSocialIcon(
-                    'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png',
-                    Icons.facebook,
-                    Colors.blue,
+                  const SizedBox(height: 20.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _buildSocialIcon(
+                        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/2048px-Google_%22G%22_logo.svg.png',
+                        Icons.g_mobiledata,
+                        Colors.red,
+                      ),
+                      const SizedBox(width: 30.0),
+                      _buildSocialIcon(
+                        'https://upload.wikedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png',
+                        Icons.facebook,
+                        Colors.blue,
+                      ),
+                    ],
                   ),
                 ],
               ),

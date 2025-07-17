@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'login_signup.dart'; // Import the login/signup UI
+import 'login_signup.dart';
+import 'homepage.dart'; // Import the cleaned homepage
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Inter',
       ),
-      home: const LoginPage(), // Starts with your custom login/signup screen
+      home: const LoginPage(),
     );
   }
 }
