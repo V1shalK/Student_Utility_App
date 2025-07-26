@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'homepage.dart'; // Import homepage
+import 'HomePage.dart'; // Import DashboardPage to navigate to it
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -37,18 +37,26 @@ class _LoginPageState extends State<LoginPage> {
       print('Login button pressed');
       print('Email: ${_emailController.text}');
       print('Password: ${_passwordController.text}');
-      Navigator.push(
+      // Navigate to DashboardPage after successful login
+      Navigator.pushReplacement( // Use pushReplacement so user can't go back to login
         context,
-        MaterialPageRoute(builder: (context) => DashboardPage()),
+        MaterialPageRoute(builder: (context) => const DashboardPage()),
       );
     } else {
       print('Sign Up button pressed');
       print('Name: ${_nameController.text}');
       print('Email: ${_emailController.text}');
       print('Password: ${_passwordController.text}');
+      // For signup, you might want to show a success message then toggle to login,
+      // or directly navigate to Dashboard. For now, it just toggles to login.
       setState(() {
         _isLogin = true;
       });
+      // Optionally navigate after signup:
+      // Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => const DashboardPage()),
+      // );
     }
   }
 
@@ -82,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 24.0),
                   width: 310,
-                  height: 487,
+                  height: 487, // Consider making height flexible if content changes
                   decoration: BoxDecoration(
                     color: const Color(0xFFE0E0DB),
                     borderRadius: BorderRadius.circular(20.0),
@@ -140,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 126.0),
+                            const SizedBox(height: 126.0), // Adjust this if content is too large
                             if (!_isLogin) ...[
                               TextField(
                                 controller: _nameController,
@@ -260,7 +268,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(width: 30.0),
                       _buildSocialIcon(
-                        'https://upload.wikedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png',
+                        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png', // Corrected typo
                         Icons.facebook,
                         Colors.blue,
                       ),

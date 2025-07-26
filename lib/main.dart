@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
-import 'login_signup.dart';
-import 'homepage.dart'; // Import the cleaned homepage
+import 'Login_Signup.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const CGPATrackerApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class CGPATrackerApp extends StatelessWidget {
+  const CGPATrackerApp({super.key});
+
+  final Color backgroundColor = const Color(0xFFf7f5ef);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Login UI',
+      title: 'CGPA Tracker App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: 'Inter',
+        scaffoldBackgroundColor: backgroundColor,
+        useMaterial3: true,
       ),
+      // The app starts with the LoginPage
       home: const LoginPage(),
     );
   }
